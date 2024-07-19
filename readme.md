@@ -29,9 +29,8 @@ To play the Hangman game with a GUI, navigate to the Using_Tkinter directory and
    python game_Tk.py
    ```
 
-## How to Play
-1. The game randomly selects a word from a predefined list.
-2. Players guess letters one at a time.
-3. Correct guesses reveal the letter in the word.
-4. Incorrect guesses decrease the number of remaining attempts.
-5. The game ends when the word is fully guessed or the attempts run out.
+## Features
+1. Main Menu: Choose to play against the computer, play against a friend, view how to play, enable/disable text-to-speech (TTS), or exit.
+2. Word Selection: Select a difficulty level (easy, medium, hard) or provide a custom word list, or have a friend pick a word for you to guess.
+3. Gameplay: Guess letters or the whole word to reveal the hidden word. You have 6 tries before the game is over. If you guess the word correctly, you win. If you fail to guess the word in 6 tries, you lose.
+4. TTS: You can enable or disable tts. When enabled, it can be skipped by pressing "ctrl" in both versions.
