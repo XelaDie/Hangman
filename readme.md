@@ -1,7 +1,7 @@
 # Hangman Game
 
 ## Description
-A simple Hangman game implemented in Python, allowing players to guess the letters of a hidden word.
+This project consists of two versions of the Hangman game: one that runs in the terminal and another with a graphical user interface (GUI) using Tkinter.
 
 ## Installation
 1. Clone the repository:
@@ -18,10 +18,16 @@ A simple Hangman game implemented in Python, allowing players to guess the lette
    ```
 
 ## Running the Game
-Run the following command to start the game:
-```
-python hangman.py
-```
+### Terminal Version
+To play the Hangman game in the terminal, navigate to the Using_Terminal directory and run:
+   ```
+   python game_Ter.py
+   ```
+### Tkinter Version
+To play the Hangman game with a GUI, navigate to the Using_Tkinter directory and run:
+   ```
+   python game_Tk.py
+   ```
 
 ## How to Play
 1. The game randomly selects a word from a predefined list.
