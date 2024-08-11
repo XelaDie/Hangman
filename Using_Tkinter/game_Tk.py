@@ -21,7 +21,6 @@ def load_image(name):
 def show_message(window, message, fg):
     message_label = tk.Label(window, text=message, font=("Helvetica", 12), fg=fg)
     message_label.place(x=500, y=80)
-    window.after(700, message_label.destroy)
 
 def main_menu():
     root = tk.Tk()
@@ -213,7 +212,7 @@ def start_game(parent, wordlist):
     def guess_letter(letter):
         nonlocal tries, discovered_word
         if letter in guessed_letters:
-            show_message(game_window, "You already guessed this letter.", "red")
+            show_message(game_window, "You already guessed this letter. ", "red")
             speak(tts_already)
         else:
             guessed_letters.append(letter)
@@ -228,7 +227,7 @@ def start_game(parent, wordlist):
                     end_game(game_window, "Congratulations", "You guessed the word correctly!", wordlist, f"h{tries + 1}f")
                 else: status()
             else:
-                show_message(game_window, "Incorrect guess. Try again.", "red")
+                show_message(game_window, "Incorrect guess. Try again.         ", "red")
                 speak(tts_bad)
                 tries += 1
                 hangman_img = load_image(f"h{tries + 1}")
@@ -244,7 +243,7 @@ def start_game(parent, wordlist):
         if guessed_word == word:
             end_game(game_window, "Congratulations", "You guessed the word correctly!", wordlist, f"h{tries + 1}f")
         else:
-            show_message(game_window, "Incorrect guess. Try again.", "red")
+            show_message(game_window, "Incorrect guess. Try again.         ", "red")
             speak(tts_bad)
             tries += 1
             hangman_img = load_image(f"h{tries + 1}")
@@ -274,8 +273,6 @@ def start_game(parent, wordlist):
 
     entry = tk.Entry(game_window, width=20, font=("Helvetica", 24))
     entry.pack(pady=10)
-    entry.bind("<FocusIn>", game_window.unbind("<KeyPress>"))
-    entry.bind("<FocusOut>", game_window.bind("<KeyPress>", on_key_press))
     
     guess_img = load_image("guess")
     guess_btn = tk.Button(game_window, image=guess_img, command=guess_word)
