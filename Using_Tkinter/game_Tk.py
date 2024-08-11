@@ -26,7 +26,8 @@ def show_message(window, message, fg):
 def main_menu():
     root = tk.Tk()
     root.title("Hangman Game")
-    root.geometry("800x800")
+    root.geometry("775x775")
+    root.resizable(0, 0)
     global friend
     friend = False
     
@@ -70,7 +71,8 @@ def choose_wordlist(parent):
 
     wordlist_window = tk.Tk()
     wordlist_window.title("Choose Wordlist")
-    wordlist_window.geometry("800x800")
+    wordlist_window.geometry("775x775")
+    wordlist_window.resizable(0, 0)
 
     logo_img = load_image("logo")
     logo_label = tk.Label(wordlist_window, image=logo_img)
@@ -104,7 +106,8 @@ def custom_wordlist(parent):
 
     custom_window = tk.Tk()
     custom_window.title("Enter Custom Words")
-    custom_window.geometry("800x800")
+    custom_window.geometry("775x775")
+    custom_window.resizable(0, 0)
 
     label = tk.Label(custom_window, text="Enter custom words separated by commas:", font=("Calibri", 32))
     label.pack(pady=(200,50))
@@ -135,7 +138,8 @@ def play_vs_friend(parent):
     
     friend_window = tk.Tk()
     friend_window.title("Enter Word")
-    friend_window.geometry("800x800")
+    friend_window.geometry("775x775")
+    friend_window.resizable(0, 0)
 
     label = tk.Label(friend_window, text="Friend, please enter the word to be guessed:", font=("Calibri", 32))
     label.pack(pady=(200,50))
@@ -163,7 +167,8 @@ def show_how_to_play(parent):
 
     htp_window = tk.Tk()
     htp_window.title("How to Play")
-    htp_window.geometry("800x800")
+    htp_window.geometry("775x775")
+    htp_window.resizable(0, 0)
 
     htp_bg_img = load_image("hpt")
     bg_label = tk.Label(htp_window, image=htp_bg_img)
@@ -186,7 +191,8 @@ def start_game(parent, wordlist):
 
     game_window = tk.Tk()
     game_window.title("Hangman Game")
-    game_window.geometry("800x800")
+    game_window.geometry("775x775")
+    game_window.resizable(0, 0)
     
     word = wordlist[randint(0, len(wordlist) - 1)]
     guessed_letters = []
@@ -248,6 +254,12 @@ def start_game(parent, wordlist):
                 end_game(game_window, "Game Over", f"You lost! The word was: {word}", wordlist, "h7")
             else: status()
 
+    def on_key_press(event):
+        if entry.focus_get() != entry:
+            letter = event.char.lower()
+            if letter in "abcdefghijklmnopqrstuvwxyz":
+                guess_letter(letter)
+
     label_word = tk.Label(game_window, text=discovered_word, font=("Helvetica", 24))
     label_word.pack(pady=(0, 50))
 
@@ -262,13 +274,18 @@ def start_game(parent, wordlist):
 
     entry = tk.Entry(game_window, width=20, font=("Helvetica", 24))
     entry.pack(pady=10)
-
+    entry.bind("<FocusIn>", game_window.unbind("<KeyPress>"))
+    entry.bind("<FocusOut>", game_window.bind("<KeyPress>", on_key_press))
+    
     guess_img = load_image("guess")
     guess_btn = tk.Button(game_window, image=guess_img, command=guess_word)
     guess_btn.image = guess_img
     guess_btn.pack(pady=10)
     
     status()
+    
+    game_window.bind("<KeyPress>", on_key_press)
+    game_window.bind_all("<Button-1>", lambda event: event.widget.focus_set())
     
     game_window.mainloop()
 
@@ -277,7 +294,8 @@ def end_game(window, title, message, wordlist, h=0):
 
     end_window = tk.Tk()
     end_window.title(title)
-    end_window.geometry("800x800")
+    end_window.geometry("775x775")
+    end_window.resizable(0, 0)
 
     logo_img = load_image("restartlogo")
     logo_label = tk.Label(end_window, image=logo_img)
@@ -310,7 +328,7 @@ def restart(window, wordlist):
     global friend
     if(friend): play_vs_friend(window)
     else: start_game(window, wordlist)
-        
+
 
 if __name__ == "__main__":
     main_menu()
